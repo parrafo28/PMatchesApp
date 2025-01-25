@@ -1,3 +1,3 @@
 # PMatchesApp
 
-Is an app
+Is an app.

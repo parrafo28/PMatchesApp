@@ -17,9 +17,13 @@ namespace PMatches.Frontend.Controllers
         {
             return View();
         }
-
+        public IActionResult Index2()
+        {
+            return View("Index");
+        }
         public IActionResult Privacy()
         {
+            ViewBag.TextFromTest = "Esto es un texto de prueba";
             return View();
         }
 

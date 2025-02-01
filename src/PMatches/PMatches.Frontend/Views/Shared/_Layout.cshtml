@@ -20,10 +20,13 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a id="homeLink" class="nav-link text-dark my-nav-links my-nav-links-hacked" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a id="privacyLink" class="nav-link text-dark my-nav-links" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                        </li>
+                        <li class="nav-item">
+                            <a id="privacyLink2" class="nav-link text-dark my-nav-links" href="Home/Privacy">Privacy 2</a>
                         </li>
                     </ul>
                 </div>
@@ -31,6 +34,11 @@
         </nav>
     </header>
     <div class="container">
+        <h1 class="text-center">hola</h1>
+        <center>
+            <h1 >hola</h1> 
+        </center>
+        <h1 style="text-align:center">hola</h1>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

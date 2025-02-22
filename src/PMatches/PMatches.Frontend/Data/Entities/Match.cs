@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Frontend.Models
+namespace PMatches.Frontend.Data.Entities
 {
     public class Match
     {
@@ -15,13 +15,16 @@ namespace PMatches.Frontend.Models
         public string? EquipNameHome { get; set; }
 
         [DisplayName("Visitante")]
-        [Required(ErrorMessage ="El campo de visitante es Reequerido")]
+        [Required(ErrorMessage = "El campo de visitante es Reequerido")]
         [StringLength(50, ErrorMessage = "La longitud maxima es 50")]
         public string? EquipNameVisitor { get; set; }
         public bool WinHome { get; set; }
         public int PointsFromVisitor { get; set; }
         public int PointsFromHome { get; set; }
         public decimal Prize { get; set; }
+
+        public int StatusId { get; set; }
+        public Status Status { get; set; }
 
 
     }

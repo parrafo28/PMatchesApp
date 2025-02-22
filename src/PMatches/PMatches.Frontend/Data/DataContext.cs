@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using PMatches.Frontend.Data.Entities;
 
 namespace PMatches.Frontend.Data
 {
@@ -9,6 +10,8 @@ namespace PMatches.Frontend.Data
         {
         }
 
-        public DbSet<PMatches.Frontend.Models.Match> Matches { get; set; }
+        public DbSet<Match> Matches { get; set; }
+        public DbSet<Team> Teams { get; set; }
+        public DbSet<Status> Status { get; set; }
     }
 }

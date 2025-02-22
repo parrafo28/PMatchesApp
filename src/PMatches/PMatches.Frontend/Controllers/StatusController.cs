@@ -1,17 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using PMatches.Frontend.Data;
 using PMatches.Frontend.Data.Entities;
-using PMatches.Frontend.Models;
 
 namespace PMatches.Frontend.Controllers
 {
-    public class MatchesController : Controller
+    public class StatusController : Controller
     {
         private readonly DataContext _context;
 
-        public MatchesController(DataContext context)
+        public StatusController(DataContext context)
         {
             _context = context;
         }
@@ -19,10 +17,9 @@ namespace PMatches.Frontend.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Matches.ToListAsync());
+            return View(await _context.Status.ToListAsync());
         }
 
-        // GET: Matches/Details/5
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -30,7 +27,7 @@ namespace PMatches.Frontend.Controllers
             {
                 return NotFound();
             }
-            var entityM = await _context.Matches
+            var entityM = await _context.Status
                             .FirstOrDefaultAsync(m => m.Id == id);
             if (entityM == null)
             {
@@ -43,36 +40,21 @@ namespace PMatches.Frontend.Controllers
 
         public IActionResult Create()
         {
-            var modelE = new MatchModel();
-
-            var status = _context.Status.ToList();
-
-            var selectList = new SelectList(status, nameof(Status.Id), nameof(Status.Name));
-
-            modelE.StatusList = selectList;
-            return View(modelE);
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MatchModel modelE)
+        public async Task<IActionResult> Create(Status entityM)
         {
+
             if (ModelState.IsValid)
             {
-
-                var entityM = new Match();
-                entityM.WinHome = modelE.WinHome;
-                entityM.PointsFromVisitor = modelE.PointsFromVisitor;
-                entityM.EquipNameVisitor = modelE.EquipNameVisitor;
-                entityM.PointsFromHome = modelE.PointsFromHome;
-                entityM.EquipNameHome = modelE.EquipNameHome;
-                entityM.Prize = modelE.Prize;
-                entityM.StatusId = modelE.StatusId;
-                _context.Matches.Add(entityM);
+                _context.Add(entityM);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(modelE);
+            return View(entityM);
         }
 
         // GET: Matches/Edit/5
@@ -83,7 +65,7 @@ namespace PMatches.Frontend.Controllers
                 return NotFound();
             }
 
-            var entityM = await _context.Matches.FindAsync(id);
+            var entityM = await _context.Status.FindAsync(id);
             if (entityM == null)
             {
                 return NotFound();
@@ -94,7 +76,7 @@ namespace PMatches.Frontend.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Match entityM)
+        public async Task<IActionResult> Edit(int id, Status entityM)
         {
             if (id != entityM.Id)
             {
@@ -131,7 +113,7 @@ namespace PMatches.Frontend.Controllers
                 return NotFound();
             }
 
-            var entityM = await _context.Matches
+            var entityM = await _context.Status
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (entityM == null)
             {
@@ -146,10 +128,10 @@ namespace PMatches.Frontend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var entityM = await _context.Matches.FindAsync(id);
+            var entityM = await _context.Status.FindAsync(id);
             if (entityM != null)
             {
-                _context.Matches.Remove(entityM);
+                _context.Status.Remove(entityM);
                 await _context.SaveChangesAsync();
             }
 
@@ -158,7 +140,7 @@ namespace PMatches.Frontend.Controllers
 
         private bool EntityExists(int id)
         {
-            return _context.Matches.Any(e => e.Id == id);
+            return _context.Status.Any(e => e.Id == id);
         }
     }
 }

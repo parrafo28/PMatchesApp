@@ -1,6 +1,6 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using PMatches.Frontend.Models;
+using System.Diagnostics;
 
 namespace PMatches.Frontend.Controllers
 {
@@ -14,7 +14,7 @@ namespace PMatches.Frontend.Controllers
         }
 
         public IActionResult Index()
-        {
+        { 
             return View();
         }
         public IActionResult Index2()

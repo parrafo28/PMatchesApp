@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PMatches.Frontend.Data;
 using PMatches.Frontend.Models;
@@ -19,21 +14,22 @@ namespace PMatches.Frontend.Controllers
             _context = context;
         }
 
-        // GET: Matches
+        [HttpGet] 
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Match.ToListAsync());
+            return View(await _context.Matches.ToListAsync());
         }
 
         // GET: Matches/Details/5
         public async Task<IActionResult> Details(int? id)
-        {
+        { 
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var match = await _context.Match
+            var match = await _context.Matches
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (match == null)
             {
@@ -43,19 +39,18 @@ namespace PMatches.Frontend.Controllers
             return View(match);
         }
 
-        // GET: Matches/Create
+         
         public IActionResult Create()
         {
+
             return View();
         }
-
-        // POST: Matches/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+         
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,EquipNameHome,EquipNameVisitor,WinHome,PointsFromVisitor,PointsFromHome,Prize")] Match match)
-        {
+        public async Task<IActionResult> Create( Match match)
+        { 
+
             if (ModelState.IsValid)
             {
                 _context.Add(match);
@@ -73,7 +68,7 @@ namespace PMatches.Frontend.Controllers
                 return NotFound();
             }
 
-            var match = await _context.Match.FindAsync(id);
+            var match = await _context.Matches.FindAsync(id);
             if (match == null)
             {
                 return NotFound();
@@ -81,16 +76,14 @@ namespace PMatches.Frontend.Controllers
             return View(match);
         }
 
-        // POST: Matches/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+ 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,EquipNameHome,EquipNameVisitor,WinHome,PointsFromVisitor,PointsFromHome,Prize")] Match match)
+        public async Task<IActionResult> Edit(int id, Match match)
         {
             if (id != match.Id)
             {
-                return NotFound();
+                return BadRequest();
             }
 
             if (ModelState.IsValid)
@@ -115,8 +108,7 @@ namespace PMatches.Frontend.Controllers
             }
             return View(match);
         }
-
-        // GET: Matches/Delete/5
+         
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,7 +116,7 @@ namespace PMatches.Frontend.Controllers
                 return NotFound();
             }
 
-            var match = await _context.Match
+            var match = await _context.Matches
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (match == null)
             {
@@ -139,19 +131,19 @@ namespace PMatches.Frontend.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var match = await _context.Match.FindAsync(id);
+            var match = await _context.Matches.FindAsync(id);
             if (match != null)
             {
-                _context.Match.Remove(match);
+                _context.Matches.Remove(match);
+                await _context.SaveChangesAsync(); 
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool MatchExists(int id)
         {
-            return _context.Match.Any(e => e.Id == id);
+            return _context.Matches.Any(e => e.Id == id);
         }
     }
 }

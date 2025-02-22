@@ -28,17 +28,15 @@
                         <li class="nav-item">
                             <a id="privacyLink2" class="nav-link text-dark my-nav-links" href="Home/Privacy">Privacy 2</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark " asp-controller="Matches" asp-action="Index"  > Matches</a>
+                        </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <h1 class="text-center">hola</h1>
-        <center>
-            <h1 >hola</h1> 
-        </center>
-        <h1 style="text-align:center">hola</h1>
+    <div class="container"> 
         <main role="main" class="pb-3">
             @RenderBody()
         </main>

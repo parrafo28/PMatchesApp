@@ -2,12 +2,12 @@
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Frontend.Models
+namespace PMatches.Api.Dtos
 {
-    public class MatchModel
+    public class MatchDto
     { 
         public int Id { get; set; }
-         
+
         [DisplayName("Home Club")]
         [Required(ErrorMessage = "El campo de home es Reequerido")]
         [StringLength(50, ErrorMessage = "La longitud maxima es 50")]
@@ -22,8 +22,8 @@ namespace PMatches.Frontend.Models
         public int PointsFromVisitor { get; set; }
         public int PointsFromHome { get; set; }
         public decimal Prize { get; set; }
-
         public int StatusId { get; set; }
-        public SelectList? StatusList { get;   set; }
+        public SelectList? StatusList { get; set; }
+         
     }
 }

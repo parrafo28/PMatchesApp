@@ -1,6 +1,6 @@
-﻿namespace PMatches.Frontend.Data.Entities
+﻿namespace PMatches.Api.Dtos
 {
-    public class Status
+    public class StatusDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

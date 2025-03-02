@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Frontend.Models
+namespace PMatches.Api.Dtos
 {
-    public class TeamModel
+    public class TeamDto
     {
           public int Id { get; set; }
 

@@ -1,4 +1,5 @@
-﻿@model PMatches.Frontend.Data.Entities.Status
+﻿@using PMatches.Frontend.Data.Entities
+@model StatusViewModel
 
 @{
     ViewData["Title"] = "Details";
@@ -7,19 +8,30 @@
 <h1>Details</h1>
 
 <div>
-    <h4>Match</h4>
+    <h4>Status</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-        
+        <dt class="col-sm-2">Name</dt>
+        <dd class="col-sm-10" id="name"></dd>
+
+       
     </dl>
 </div>
+
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a href="#" onclick="history.back()" class="btn btn-secondary">Back to List</a>
 </div>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            loadDetails(@Model.Id);
+        });
+
+        function loadDetails(id) {
+                $.get(`https://localhost:7135/api/status/Get/${id}`, function (data) {
+                $("#name").text(data.name); 
+            });
+        }
+    </script>
+}

@@ -1,7 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Frontend.Data.Entities
+namespace PMatches.Domain.Entities
 {
     public class Team
     {

@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PMatches.Frontend.Data.Entities;
+using PMatches.Domain.Entities; 
 
-namespace PMatches.Frontend.Data
+namespace PMatches.Persistence
 {
     public class DataContext : DbContext
     {

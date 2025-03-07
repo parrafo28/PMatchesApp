@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using PMatches.Domain.Entities;
 using PMatches.Frontend.Data;
 using PMatches.Frontend.Data.Entities;
 using PMatches.Frontend.Models;
+using PMatches.Frontend.Utils;
+using PMatches.Persistence;
 
 namespace PMatches.Frontend.Controllers
 {
@@ -17,12 +20,16 @@ namespace PMatches.Frontend.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string searchParam = "")
         {
-            return View(await _context.Matches.ToListAsync());
-        }
+            var matches = _context.Matches.Where(p => p.StatusId > 0);
 
-        // GET: Matches/Details/5
+            searchParam = searchParam.ToLower();
+            var matchesList = matches.Where(m => m.EquipNameHome.ToLower().Contains(searchParam) || m.EquipNameVisitor.ToLower().Contains(searchParam)).ToList();
+
+            return View(matchesList);
+        }
+         
         public async Task<IActionResult> Details(int? id)
         {
 
@@ -36,59 +43,31 @@ namespace PMatches.Frontend.Controllers
             {
                 return NotFound();
             }
-
-            return View(entityM);
+            var modelE = EntityViewModelConverter.MatchEntityToViewModel(entityM);
+            return View(modelE);
         }
-
 
         public IActionResult Create()
-        {
-            var modelE = new MatchModel();
-
-            var status = _context.Status.ToList();
-
-            var selectList = new SelectList(status, nameof(Status.Id), nameof(Status.Name));
-
-            modelE.StatusList = selectList;
-            return View(modelE);
+        {  
+            return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(MatchModel modelE)
-        {
-            if (ModelState.IsValid)
-            {
-
-                var entityM = new Match();
-                entityM.WinHome = modelE.WinHome;
-                entityM.PointsFromVisitor = modelE.PointsFromVisitor;
-                entityM.EquipNameVisitor = modelE.EquipNameVisitor;
-                entityM.PointsFromHome = modelE.PointsFromHome;
-                entityM.EquipNameHome = modelE.EquipNameHome;
-                entityM.Prize = modelE.Prize;
-                entityM.StatusId = modelE.StatusId;
-                _context.Matches.Add(entityM);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(modelE);
-        }
-
+         
         // GET: Matches/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int? identifier)
         {
-            if (id == null)
+            if (identifier == null)
             {
                 return NotFound();
             }
 
-            var entityM = await _context.Matches.FindAsync(id);
+            var entityM = await _context.Matches.FindAsync(identifier);
             if (entityM == null)
             {
                 return NotFound();
             }
-            return View(entityM);
+            var modelE = EntityViewModelConverter.MatchEntityToViewModel(entityM);
+
+            return View(modelE);
         }
 
 
@@ -160,5 +139,8 @@ namespace PMatches.Frontend.Controllers
         {
             return _context.Matches.Any(e => e.Id == id);
         }
+
+
+
     }
 }

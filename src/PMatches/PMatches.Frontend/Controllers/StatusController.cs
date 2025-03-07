@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using PMatches.Domain.Entities;
 using PMatches.Frontend.Data;
 using PMatches.Frontend.Data.Entities;
+using PMatches.Persistence;
 
 namespace PMatches.Frontend.Controllers
 {
@@ -13,11 +15,11 @@ namespace PMatches.Frontend.Controllers
         {
             _context = context;
         }
-
+         
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Status.ToListAsync());
+            return View();
         }
 
         public async Task<IActionResult> Details(int? id)
@@ -27,36 +29,17 @@ namespace PMatches.Frontend.Controllers
             {
                 return NotFound();
             }
-            var entityM = await _context.Status
-                            .FirstOrDefaultAsync(m => m.Id == id);
-            if (entityM == null)
-            {
-                return NotFound();
-            }
 
-            return View(entityM);
+            var vm = new StatusViewModel { Id = id.Value };
+
+            return View(vm);
         }
-
-
+         
         public IActionResult Create()
         {
             return View();
         }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Status entityM)
-        {
-
-            if (ModelState.IsValid)
-            {
-                _context.Add(entityM);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(entityM);
-        }
-
+         
         // GET: Matches/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

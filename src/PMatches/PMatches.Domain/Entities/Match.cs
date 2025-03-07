@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Frontend.Data.Entities
+namespace PMatches.Domain.Entities
 {
     public class Match
     {

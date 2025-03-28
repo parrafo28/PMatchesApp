@@ -1,4 +1,4 @@
-﻿@model  Status
+﻿@model PMatches.Frontend.ViewModels.StatusViewModel
 
 @{
     ViewData["Title"] = "Edit";
@@ -6,29 +6,63 @@
 
 <h1>Edit</h1>
 
-<h4>Match</h4>
+<h4>Status</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
+    <input type="hidden" id="modelId" />
+        <div class="form-group">
+            <label class="control-label">Name</label>
+            <input id="name" class="form-control" />
+        </div>
+
+        <div class="form-group">
+            <button onclick="saveStatus()" class="btn btn-primary">Save Changes</button>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <script>
+
+         $(document).ready(function () {
+             console.log('1111111111111111');
+             console.log(@Model.Id);
+             console.log('22222222222');
+
+            loadDetails(@Model.Id);
+               console.log('3333333333333');
+             console.log(@Model.Id);
+
+             console.log('444444444444');
+
+        });
+
+        function loadDetails(id) {
+                $.get(`https://localhost:7135/api/status/Get/${id}`, function (data) {
+                $("#modelId").val(data.id);
+                $("#name").val(data.name);
+            });
+        }
+        function saveStatus() {
+            let status = {
+                id: $("#modelId").val(),
+                name: $("#name").val()
+            };
+
+            $.ajax({
+                url: "https://localhost:7135/api/Status/Update",
+                type: "PUT",
+                contentType: "application/json",
+                data: JSON.stringify(status),
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = "/Status/Index";
+                    } else {
+                        alert("Error: " + response.message);
+                    }
+                }
+            });
+        }
+    </script>
 }

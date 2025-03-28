@@ -1,5 +1,4 @@
 ﻿using PMatches.Domain.Entities;
-using PMatches.Frontend.Data.Entities;
 using PMatches.Frontend.Models;
 
 namespace PMatches.Frontend.Utils
@@ -17,6 +16,19 @@ namespace PMatches.Frontend.Utils
             modelE.Prize = entityM.Prize;
             modelE.StatusId = entityM.StatusId;
             return modelE;
+        }
+
+        public static Match MatchViewModelToEntity(MatchViewModel? vm)
+        {
+            var entity = new Match();
+            entity.WinHome = vm.WinHome;
+            entity.PointsFromVisitor = vm.PointsFromVisitor;
+            entity.EquipNameVisitor = vm.EquipNameVisitor;
+            entity.PointsFromHome = vm.PointsFromHome;
+            entity.EquipNameHome = vm.EquipNameHome;
+            entity.Prize = vm.Prize;
+            entity.StatusId = vm.StatusId;
+            return entity;
         }
     }
 }

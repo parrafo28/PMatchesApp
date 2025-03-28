@@ -1,8 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using PMatches.Domain.Entities;
-using PMatches.Frontend.Data;
-using PMatches.Frontend.Data.Entities;
+using PMatches.Frontend.ViewModels;
 using PMatches.Persistence;
 
 namespace PMatches.Frontend.Controllers
@@ -15,7 +13,7 @@ namespace PMatches.Frontend.Controllers
         {
             _context = context;
         }
-         
+
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -34,13 +32,12 @@ namespace PMatches.Frontend.Controllers
 
             return View(vm);
         }
-         
+
         public IActionResult Create()
         {
             return View();
         }
-         
-        // GET: Matches/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -48,45 +45,9 @@ namespace PMatches.Frontend.Controllers
                 return NotFound();
             }
 
-            var entityM = await _context.Status.FindAsync(id);
-            if (entityM == null)
-            {
-                return NotFound();
-            }
-            return View(entityM);
-        }
+            var vm = new StatusViewModel { Id = id.Value };
+            return View(vm);
 
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Status entityM)
-        {
-            if (id != entityM.Id)
-            {
-                return BadRequest();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(entityM);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!EntityExists(entityM.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(entityM);
         }
 
         public async Task<IActionResult> Delete(int? id)

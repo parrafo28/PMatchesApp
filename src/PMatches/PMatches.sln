@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMatches.Persistence", "PMa
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMatches.Domain", "PMatches.Domain\PMatches.Domain.csproj", "{CE732EBE-E4A7-41B6-86B3-AB741321EB39}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{4D5D2D3A-2B65-45C0-9481-F7316E200FC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PMatches.Presentation", "PMatches.Presentation\PMatches.Presentation.csproj", "{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,8 +37,17 @@ Global
 		{CE732EBE-E4A7-41B6-86B3-AB741321EB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CE732EBE-E4A7-41B6-86B3-AB741321EB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CE732EBE-E4A7-41B6-86B3-AB741321EB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F7BB343-AEEB-429B-99DB-E0A1A6E9B987} = {4D5D2D3A-2B65-45C0-9481-F7316E200FC0}
+		{F3259894-FCAF-4C85-8097-8F0E193FD761} = {4D5D2D3A-2B65-45C0-9481-F7316E200FC0}
+		{324BA671-1CB0-4D81-AF28-A6B27E1AC1F3} = {4D5D2D3A-2B65-45C0-9481-F7316E200FC0}
 	EndGlobalSection
 EndGlobal

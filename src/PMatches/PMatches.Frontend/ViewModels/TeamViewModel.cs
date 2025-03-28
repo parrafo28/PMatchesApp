@@ -1,16 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace PMatches.Frontend.Models
 {
     public class TeamViewModel
     {
-          public int Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
-     
+
         public string Initials { get; set; }
-         
+
         [DataType(DataType.ImageUrl)]
         public string PictureUrl { get; set; }
 
@@ -29,6 +28,6 @@ namespace PMatches.Frontend.Models
         public int? MatchesTied { get; set; }
 
         public int? Position { get; set; }
-         
+
     }
 }

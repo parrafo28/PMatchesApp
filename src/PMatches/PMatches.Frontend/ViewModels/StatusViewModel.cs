@@ -1,4 +1,4 @@
-﻿namespace PMatches.Frontend.Data.Entities
+﻿namespace PMatches.Frontend.ViewModels
 {
     public class StatusViewModel
     {

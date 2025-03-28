@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
-using PMatches.Frontend.Data;
 using PMatches.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 

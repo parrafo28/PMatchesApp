@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Api.Dtos
+namespace PMatches.Domain.DTOs
 {
     public class MatchDto
     { 
@@ -23,7 +22,7 @@ namespace PMatches.Api.Dtos
         public int PointsFromHome { get; set; }
         public decimal Prize { get; set; }
         public int StatusId { get; set; }
-        public SelectList? StatusList { get; set; }
+        //public SelectList? StatusList { get; set; }
          
     }
 }

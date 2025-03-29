@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using PMatches.Infrastructure.Repositories;
 using PMatches.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -24,6 +25,8 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader();
         });
 });
+
+builder.Services.AddTransient<StatusRepository>();
 
 var app = builder.Build();
 

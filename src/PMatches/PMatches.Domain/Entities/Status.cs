@@ -1,8 +1,10 @@
-﻿namespace PMatches.Domain.Entities
+﻿using PMatches.Domain.Core;
+
+namespace PMatches.Domain.Entities
 {
-    public class Status
+    public class Status : BaseEntity
     {
-        public int Id { get; set; }
+       
         public string Name { get; set; }
         public List<Match> Matches { get; set; }
     }

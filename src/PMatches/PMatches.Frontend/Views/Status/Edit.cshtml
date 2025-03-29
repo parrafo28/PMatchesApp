@@ -39,9 +39,9 @@
         });
 
         function loadDetails(id) {
-                $.get(`https://localhost:7135/api/status/Get/${id}`, function (data) {
-                $("#modelId").val(data.id);
-                $("#name").val(data.name);
+                $.get(`https://localhost:7135/api/status/Get/${id}`, function (response) {
+                $("#modelId").val(response.data.id);
+                $("#name").val(response.data.name);
             });
         }
         function saveStatus() {

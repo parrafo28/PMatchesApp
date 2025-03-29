@@ -30,8 +30,8 @@
         });
 
         function loadDetails(id) {
-                $.get(`https://localhost:7135/api/status/Get/${id}`, function (data) {
-                $("#name").text(data.name); 
+                $.get(`https://localhost:7135/api/status/Get/${id}`, function (response) {
+                $("#name").text(response.data.name);
             });
         }
     </script>

@@ -1,11 +1,12 @@
-﻿using PMatches.Domain.Core;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace PMatches.Domain.Entities
 {
-    public class Match: BaseEntity
+    public class MatchModel
     { 
+        public int Id { get; set; }
+
         [DisplayName("Home Club")]
         [Required(ErrorMessage = "El campo de home es Reequerido")]
         [StringLength(50, ErrorMessage = "La longitud maxima es 50")]
@@ -22,7 +23,7 @@ namespace PMatches.Domain.Entities
         public decimal Prize { get; set; }
 
         public int StatusId { get; set; }
-        public Status Status { get; set; }
+        public StatusModel Status { get; set; }
 
 
     }

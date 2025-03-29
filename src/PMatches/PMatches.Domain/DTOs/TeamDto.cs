@@ -1,14 +1,16 @@
-﻿using PMatches.Domain.Core;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace PMatches.Domain.Entities
+namespace PMatches.Domain.DTOs
 {
-    public class Team : BaseEntity
-    { 
+    public class TeamDto
+    {
+          public int Id { get; set; }
+
         public string Name { get; set; }
-
+     
         public string Initials { get; set; }
-
+         
         [DataType(DataType.ImageUrl)]
         public string PictureUrl { get; set; }
 
@@ -27,6 +29,6 @@ namespace PMatches.Domain.Entities
         public int? MatchesTied { get; set; }
 
         public int? Position { get; set; }
-
+         
     }
 }

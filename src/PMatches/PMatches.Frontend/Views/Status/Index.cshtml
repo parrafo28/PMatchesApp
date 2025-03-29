@@ -39,10 +39,10 @@
         function loadStatus() {
             let filter = $("#search").val();
 
-                $.get("https://localhost:7135/api/status/getall", { filter: filter }, function (data) {
+                $.get("https://localhost:7135/api/status/getall", { filter: filter }, function (response) {
                 let rows = "";
-                console.log(data);
-                data.forEach(item => {
+                console.log(response);
+                response.data.forEach(item => {
                     rows += `<tr>
                         <td>${item.name}</td> 
                         <td>

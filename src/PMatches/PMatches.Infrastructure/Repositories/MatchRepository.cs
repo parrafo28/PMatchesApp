@@ -7,12 +7,12 @@ using PMatches.Presentation.Responses;
 
 namespace PMatches.Infrastructure.Repositories
 {
-    public class MatchRepository: BaseRepository<Match>
+    public class MatchRepository : BaseRepository<Match>, IMatchRepository
     {
-        public MatchRepository(DataContext context): base(context)  
+        public MatchRepository(DataContext context) : base(context)
         {
         }
- 
+
         public async Task<Response<MatchDto>> GetById(int id)
         {
             var entity = await GetEntityById(id);

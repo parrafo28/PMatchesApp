@@ -17,7 +17,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PMatches.Persistence\PMatches.Persistence.csproj" />
+    <ProjectReference Include="..\PMatches.Common\PMatches.Common.csproj" />
+    <ProjectReference Include="..\PMatches.Domain\PMatches.Domain.csproj" />
+    <ProjectReference Include="..\PMatches.Infrastructure\PMatches.Infrastructure.csproj" />
+    <ProjectReference Include="..\PMatches.Presentation\PMatches.Presentation.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Storage;
 using PMatches.Domain.Core;
 using PMatches.Persistence;
+using System.Linq.Expressions;
 
 namespace PMatches.Infrastructure.Core
 {
     public class BaseRepository<T> where T : BaseEntity
     {
         protected readonly DataContext Context;
+        private IDbContextTransaction _transaction;
+
         public BaseRepository(DataContext context)
         {
             Context = context;
@@ -21,18 +25,24 @@ namespace PMatches.Infrastructure.Core
             return await Context.Set<T>().FindAsync(id);
         }
 
+        public async Task<List<T>> FindAsync(Expression<Func<T, bool>> predicate)
+        {
+            return await Context.Set<T>().Where(predicate).ToListAsync();
+        }
+
         public async Task<int> Add(T entity)
         {
             Context.Set<T>().Add(entity);
-            await Context.SaveChangesAsync();
             return entity.Id;
 
         }
         public async Task<bool> Update(T entity)
         {
             Context.Set<T>().Update(entity);
-            await Context.SaveChangesAsync();
             return true;
         }
+
+
+
     }
 }

@@ -1,9 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using PMatches.Persistence;
-var builder = WebApplication.CreateBuilder(args);
-
-builder.Services.AddDbContext<DataContext>(o =>
-    o.UseSqlServer(builder.Configuration.GetConnectionString("MainConnection") ?? throw new InvalidOperationException("Connection string 'MainConnection' not found.")));
+﻿var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

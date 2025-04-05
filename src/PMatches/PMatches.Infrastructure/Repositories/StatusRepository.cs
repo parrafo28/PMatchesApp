@@ -7,7 +7,7 @@ using PMatches.Presentation.Responses;
 
 namespace PMatches.Infrastructure.Repositories
 {
-    public class StatusRepository : BaseRepository<Status>
+    public class StatusRepository : BaseRepository<Status>, IStatusRepository
     {
         public StatusRepository(DataContext context) : base(context)
         {
@@ -34,17 +34,19 @@ namespace PMatches.Infrastructure.Repositories
 
         public async Task<Response<List<StatusDto>>> GetAll(string filter = "")
         {
-            var list = Context.Status.Include(p => p.Matches).Where(P => P.Id > 0);
-
+            var list = new List<Status>();
+            
             if (!string.IsNullOrEmpty(filter))
             {
-                list = list.Where(d => d.Name.ToLower().Contains(filter.ToLower()));
+                  list = await FindAsync(d => d.Name.ToLower().Contains(filter.ToLower()));
             }
-
-            var entities = await list.ToListAsync();
+            else {
+                list = await base.GetAll();
+            }
+             
             List<StatusDto> response = new List<StatusDto>();
 
-            foreach (var entity in entities)
+            foreach (var entity in list)
             {
                 response.Add(new StatusDto { Id = entity.Id, Name = entity.Name });
             }

@@ -8,8 +8,7 @@ namespace PMatches.Infrastructure.Core
 {
     public class BaseRepository<T> where T : BaseEntity
     {
-        protected readonly DataContext Context;
-        private IDbContextTransaction _transaction;
+        protected readonly DataContext Context; 
 
         public BaseRepository(DataContext context)
         {

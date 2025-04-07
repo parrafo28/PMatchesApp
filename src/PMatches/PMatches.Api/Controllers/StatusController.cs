@@ -1,8 +1,7 @@
 ﻿
 using Microsoft.AspNetCore.Mvc;
+using PMatches.Application.Contracts;
 using PMatches.Domain.DTOs;
-using PMatches.Infrastructure.Core;
-using PMatches.Infrastructure.Repositories;
 using PMatches.Presentation.Responses;
 
 namespace PMatches.Api.Controllers
@@ -11,25 +10,23 @@ namespace PMatches.Api.Controllers
     [Route("api/[controller]")]
     public class StatusController : ControllerBase
     {
-        private readonly IStatusRepository _statusRepository;
-        private readonly UnitOfWork _unitOfWork;
+        private readonly IStatusService _statusService;
 
-        public StatusController(IStatusRepository statusRepository, UnitOfWork unitOfWork)
+        public StatusController(IStatusService statusService)
         {
-            _statusRepository = statusRepository;
-            _unitOfWork = unitOfWork;
+            _statusService = statusService;
         }
 
         [HttpGet("Get/{id}")]
         public async Task<Response<StatusDto>> Get(int id)
         {
-            return await _statusRepository.GetById(id);
+            return await _statusService.GetStatusById(id);
         }
 
         [HttpGet(nameof(GetAll))]
         public async Task<Response<List<StatusDto>>> GetAll(string filter = "")
         {
-            return await _statusRepository.GetAll(filter);
+            return await _statusService.GetAllStatus(filter);
         }
 
         [HttpPost("Add")]
@@ -39,19 +36,7 @@ namespace PMatches.Api.Controllers
             {
                 return new Response<StatusDto> { Success = false, Message = "The Resource is not valid" };
             }
-            try
-            {
-                await _unitOfWork.BeginTransactionAsync();
-                var result = await _statusRepository.Create(dto);
-                await _unitOfWork.CompleteAsync();
-                await _unitOfWork.CommitTransactionAsync();
-                return result;
-            }
-            catch (Exception)
-            {
-                await _unitOfWork.RollbackTransactionAsync(); 
-                throw;
-            }
+            return await _statusService.CreateStatus(dto);
 
         }
 
@@ -63,7 +48,7 @@ namespace PMatches.Api.Controllers
                 return new Response<StatusDto> { Success = false, Message = "The Resource is not valid" };
             }
 
-            return await _statusRepository.Update(dto);
+            return await _statusService.UpdateStatus(dto);
         }
     }
 }

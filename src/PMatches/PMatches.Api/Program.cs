@@ -1,4 +1,6 @@
 using Microsoft.EntityFrameworkCore;
+using PMatches.Application.Contracts;
+using PMatches.Application.Services;
 using PMatches.Infrastructure.Contracts;
 using PMatches.Infrastructure.Core;
 using PMatches.Infrastructure.Repositories;
@@ -28,8 +30,11 @@ builder.Services.AddCors(options =>
         });
 });
 
+builder.Services.AddTransient<IStatusService, StatusService>();
+ 
 builder.Services.AddTransient<IStatusRepository,StatusRepository>();
 builder.Services.AddTransient<IMatchRepository, MatchRepository>();
+
 builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();

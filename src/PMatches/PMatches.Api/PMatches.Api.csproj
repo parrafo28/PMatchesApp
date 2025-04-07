@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PMatches.Application\PMatches.Application.csproj" />
     <ProjectReference Include="..\PMatches.Infrastructure\PMatches.Infrastructure.csproj" />
     <ProjectReference Include="..\PMatches.Persistence\PMatches.Persistence.csproj" />
     <ProjectReference Include="..\PMatches.Presentation\PMatches.Presentation.csproj" />
